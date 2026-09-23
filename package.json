@@ -1,0 +1,163 @@
+{
+  "name": "@zakadi/react-native",
+  "version": "0.1.0",
+  "description": "Zakadi SDK for React Native, New Architecture only",
+  "main": "./lib/module/index.js",
+  "types": "./lib/typescript/src/index.d.ts",
+  "exports": {
+    ".": {
+      "zakadi-react-native-source": "./src/index.ts",
+      "types": "./lib/typescript/src/index.d.ts",
+      "default": "./lib/module/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "lib",
+    "android",
+    "ios",
+    "cpp",
+    "*.podspec",
+    "react-native.config.js",
+    "!ios/build",
+    "!android/build",
+    "!android/gradle",
+    "!android/gradlew",
+    "!android/gradlew.bat",
+    "!android/local.properties",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__",
+    "!**/.*",
+    "NOTICE"
+  ],
+  "scripts": {
+    "example": "npm run --workspace @zakadi/react-native-example",
+    "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
+    "prepare": "bob build",
+    "typecheck": "tsc",
+    "lint": "eslint . && tsc --noEmit",
+    "test": "jest",
+    "format": "prettier --check .",
+    "test:integration": "if [ \"$(uname)\" = Darwin ]; then npm run build:ios --workspace @zakadi/react-native-example; else npm run build:android --workspace @zakadi/react-native-example; fi"
+  },
+  "keywords": [
+    "react-native",
+    "ios",
+    "android"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zakadihq/zakadi-react-native.git"
+  },
+  "author": "Moses Gameli",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/zakadihq/zakadi-react-native/issues"
+  },
+  "homepage": "https://github.com/zakadihq/zakadi-react-native#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^2.1.0",
+    "@eslint/eslintrc": "^3.3.6",
+    "@eslint/js": "^9.39.5",
+    "@jest/globals": "^29.7.0",
+    "@react-native/babel-preset": "0.87.1",
+    "@react-native/eslint-config": "0.87.1",
+    "@react-native/jest-preset": "0.87.1",
+    "@types/react": "^19.2.0",
+    "del-cli": "^7.0.0",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-ft-flow": "^3.0.11",
+    "eslint-plugin-prettier": "^5.5.6",
+    "jest": "^29.7.0",
+    "lefthook": "^2.1.14",
+    "prettier": "^3.9.6",
+    "react": "19.2.3",
+    "react-native": "0.87.1",
+    "react-native-builder-bob": "^0.43.1",
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": ">=0.82.0"
+  },
+  "workspaces": [
+    "example"
+  ],
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      [
+        "module",
+        {
+          "esm": true
+        }
+      ],
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
+    ]
+  },
+  "prettier": {
+    "quoteProps": "consistent",
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "useTabs": false
+  },
+  "jest": {
+    "preset": "@react-native/jest-preset",
+    "testEnvironmentOptions": {
+      "customExportConditions": [
+        "require",
+        "react-native",
+        "zakadi-react-native-source"
+      ]
+    },
+    "modulePathIgnorePatterns": [
+      "<rootDir>/example/node_modules",
+      "<rootDir>/lib/"
+    ]
+  },
+  "create-react-native-library": {
+    "type": "turbo-module",
+    "languages": "kotlin-objc",
+    "tools": [
+      "eslint",
+      "jest"
+    ],
+    "version": "0.63.1"
+  },
+  "codegenConfig": {
+    "name": "RNZakadiSpec",
+    "type": "all",
+    "jsSrcsDir": "src/specs",
+    "android": {
+      "javaPackageName": "dev.zakadi.reactnative"
+    },
+    "ios": {
+      "modules": {
+        "ZakadiSdk": {
+          "className": "RNZakadi"
+        }
+      },
+      "components": {
+        "ZakadiCallView": {
+          "className": "RNZakadiCallComponentView"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@zakadi/protocol": "0.1.0"
+  }
+}
