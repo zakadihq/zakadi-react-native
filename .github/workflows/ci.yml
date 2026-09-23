@@ -2,7 +2,10 @@
 # The commands are the ones in lefthook.yml, through the package scripts: format
 # (prettier --check .), lint (eslint . && tsc --noEmit), test and test:integration,
 # which builds the example app with codegen over both specs: Android on Linux, iOS
-# on macOS.
+# on macOS. The lint job ends with the scan (CI only, references/GITHUB.md): the
+# licence of every production dependency, from npm query at the root (the library's
+# and the example workspace's), against the excluded list of spec 00 0.10, then npm
+# audit over the same dependencies.
 name: ci
 
 on:
@@ -39,6 +42,17 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      - name: scan
+        shell: bash
+        env:
+          EXCLUDED_LICENCES: '(^|[^[:alnum:]])(A?GPL|SSPL|RSAL)|GNU (Affero )?General Public|Server Side Public|Redis Source Available|-NC([^[:alnum:]]|$)|[Nn]on[- ]?[Cc]ommercial|FoxIO'
+        run: |
+          npm query .prod | jq -r '.[] | "\(.name)@\(.version) \(.license // .licenses // "unknown")"' | tee "$RUNNER_TEMP/licences.txt"
+          if grep -E "$EXCLUDED_LICENCES" "$RUNNER_TEMP/licences.txt"; then
+            echo "scan: a licence excluded by spec 00 0.10 is listed above" >&2
+            exit 1
+          fi
+          npm audit --omit=dev
 
   unit:
     runs-on: ubuntu-latest
