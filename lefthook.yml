@@ -5,6 +5,13 @@
 pre-commit:
   jobs:
     - name: ascii
+      # gradle wrapper writes these scripts (the example app's, under example/android)
+      # and rewrites them on every upgrade; they are never edited by hand.
+      exclude:
+        - 'gradlew'
+        - 'gradlew.bat'
+        - '**/gradlew'
+        - '**/gradlew.bat'
       run: '! LC_ALL=C grep -nHI "[^[:print:][:space:]]" {staged_files}'
     - name: secrets
       glob: '{.env*,**/.env*}'
