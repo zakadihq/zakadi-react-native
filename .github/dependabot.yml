@@ -1,0 +1,28 @@
+# Zakadi repository standard: Dependabot.
+# One entry per ecosystem and manifest directory the ticket names, plus
+# github-actions. The npm entry covers the example workspace.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      npm-minor-and-patch:
+        update-types: ['minor', 'patch']
+
+  - package-ecosystem: gradle
+    directory: /android
+    schedule:
+      interval: weekly
+    groups:
+      gradle-minor-and-patch:
+        update-types: ['minor', 'patch']
