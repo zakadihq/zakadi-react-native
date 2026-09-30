@@ -159,5 +159,11 @@
   },
   "dependencies": {
     "@zakadi/protocol": "0.1.0"
+  },
+  "allowScripts": {
+    "lefthook": true,
+    "@parcel/watcher": false,
+    "fsevents": false,
+    "unrs-resolver": false
   }
 }
