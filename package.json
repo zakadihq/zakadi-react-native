@@ -65,21 +65,21 @@
     "@eslint/eslintrc": "^3.3.6",
     "@eslint/js": "^9.39.5",
     "@jest/globals": "^29.7.0",
-    "@react-native/babel-preset": "0.87.1",
-    "@react-native/eslint-config": "0.87.1",
-    "@react-native/jest-preset": "0.87.1",
+    "@react-native/babel-preset": "0.88.0",
+    "@react-native/eslint-config": "0.88.0",
+    "@react-native/jest-preset": "0.88.0",
     "@types/react": "^19.2.0",
     "del-cli": "^7.0.0",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-ft-flow": "^3.0.11",
-    "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-prettier": "^5.5.7",
     "jest": "^30.5.2",
-    "lefthook": "^2.1.14",
-    "prettier": "^3.9.6",
-    "react": "19.3.0",
-    "react-native": "0.87.1",
-    "react-native-builder-bob": "^0.43.1",
+    "lefthook": "^2.2.2",
+    "prettier": "^3.9.10",
+    "react": "19.3.1",
+    "react-native": "0.88.0",
+    "react-native-builder-bob": "^0.43.2",
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
@@ -158,7 +158,7 @@
     }
   },
   "dependencies": {
-    "@zakadi/protocol": "0.1.0"
+    "@zakadi/protocol": "0.2.1"
   },
   "allowScripts": {
     "lefthook": true,
